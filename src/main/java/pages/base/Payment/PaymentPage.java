@@ -41,11 +41,12 @@ public class PaymentPage extends BasePage {
         Month(String month) {
             this.month= month;
         }
-        private String month;
+        private final String month;
         public String getMonth() {
            return month;
         }
     }
+
     @Step("Continue payment")
     public PaymentPage continuePayment()
     {
