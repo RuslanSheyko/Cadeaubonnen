@@ -66,7 +66,9 @@ public class InitialDriver extends Options {
      * CHROME-LOCAL - a local driver instance for Chrome obtained from src / main / resources / chromedriver.exe
      * default - an instance of the local driver for Firefox obtained from src / main / resources / geckodriver.exe
      */
+
     private synchronized WebDriver initialDriver() {
+
         switch (driverName) {
             case "CHROME_LOCAL": {
                 System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver.exe");
@@ -96,11 +98,6 @@ public class InitialDriver extends Options {
         return driver;
     }
 
-    /**
-     * Returns the name of the web driver browser
-     *
-     * @return driver name string
-     */
     public String getBrowserExecuted() {
         return ((RemoteWebDriver) driver).getCapabilities().getBrowserName().toLowerCase();
     }

@@ -1,6 +1,8 @@
 package pages.base;
 
 import base.elements.*;
+import io.qameta.allure.Step;
+import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import pages.DigitalPage;
@@ -11,8 +13,9 @@ import java.util.stream.Collectors;
 
 import static base.util.BaseConstants.APPLICATION_URL;
 
-public class BasePage {
 
+@Slf4j
+public class BasePage {
 
     protected Window window = new Window();
     protected Button button = new Button();
@@ -32,16 +35,19 @@ public class BasePage {
     By searchElementResult = By.xpath(" //div[contains(text(),'resultaat')]");
 
 
+    @Step("Select digital gift card")
     public DigitalPage selectDigitalGiftCards() {
         button.click(digitalCart);
         return new DigitalPage();
     }
 
+    @Step("Open Bucket")
     public MyShoppingCartPage openBucket() {
         button.click(bucket);
         return new MyShoppingCartPage();
     }
 
+    @Step("Open base page")
     public BasePage openBasePage() {
         window.navigateTo(APPLICATION_URL);
         if (elementProperties.isVisibility(acceptAll))
@@ -53,7 +59,7 @@ public class BasePage {
         return window.getPageUrl();
     }
 
-
+    @Step("Open main menu")
     public BasePage openMainMenu() {
         button.click(mainMenu);
         return this;
@@ -63,17 +69,20 @@ public class BasePage {
         return elementProperties.selectFromList(listMenu).stream().map(WebElement::getText).collect(Collectors.toList());
 
     }
-
+    @Step("Start search {search}")
     public BasePage searchPage(String search) {
         field.typeText(searchField, search);
         return this;
     }
 
+    @Step("Get result of search")
     public BasePage resultOfSearch(String text)
     {
         field.containsText(searchElementResult,text);
         return this;
     }
+
+    @Step("Get product from search window")
     public String getProductFromSearchWindow(int index) {
         elementProperties.waitUntilInvisible(loading);
         elementProperties.waitUntilVisible(searchElement);

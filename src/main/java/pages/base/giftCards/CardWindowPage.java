@@ -4,11 +4,11 @@ import org.openqa.selenium.By;
 import pages.base.BasePage;
 
 public class CardWindowPage extends BasePage {
-    By name=By.name("name");
-    By email=By.name("email");
-    By confirmEmail=By.name("confirmEmail");
-    By shopNow=By.xpath("//div[text()=\"In m’n winkelmandje\"]");
 
+    private final By name=By.name("name");
+    private final By email=By.name("email");
+    private final By confirmEmail=By.name("confirmEmail");
+    private final By shopNow=By.xpath("//div[text()=\"In m’n winkelmandje\"]");
 
     public CardWindowPage sendName(String nameValue)
     {

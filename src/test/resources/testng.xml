@@ -5,7 +5,8 @@
     </listeners>
     <test name="Smoke">
         <classes>
-
+            <class name="BaseTest"/>
+            <class name="PaymentTest"/>
         </classes>
     </test>
 </suite>

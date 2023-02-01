@@ -1,25 +1,20 @@
 package base.listeners;
 
 import base.driver.InitialDriver;
+import com.google.common.collect.ImmutableMap;
 import io.qameta.allure.Attachment;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.testng.*;
-import org.testng.annotations.AfterClass;
-
+import static com.github.automatedowl.tools.AllureEnvironmentWriter.allureEnvironmentWriter;
 /**
  * Listener for handling events and different test steps in TestNG
  */
 @Slf4j
 public class Listener implements ITestListener, ISuiteListener, IInvokedMethodListener {
 
-    @AfterClass
-    public void afterClass()
-    {
-        InitialDriver.getInstance().destroy();
-    }
     /**
      * Actions on successful completion of the test
      */
@@ -54,7 +49,6 @@ public class Listener implements ITestListener, ISuiteListener, IInvokedMethodLi
     @Override
     public void onTestSkipped(ITestResult arg0) {
         log.info("Test finished... " + arg0.getName() + " SKIPPED");
-
     }
 
     /**
@@ -97,6 +91,12 @@ public class Listener implements ITestListener, ISuiteListener, IInvokedMethodLi
 
     @Override
     public void onStart(ISuite iSuite) {
+        allureEnvironmentWriter(
+                ImmutableMap.<String, String>builder()
+                        .put("Browser", "Chrome")
+                        .put("Browser.Version", "70.0.3538.77")
+                        .put("URL", "http://testjs.site88.net")
+                        .build());
 
     }
 

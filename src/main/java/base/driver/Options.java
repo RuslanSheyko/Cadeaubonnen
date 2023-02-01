@@ -3,9 +3,6 @@ package base.driver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxOptions;
 
-import static base.elements.FileDownloadWindow.getFileDownloadOptions;
-import static base.elements.FileDownloadWindow.getGeckoDownloadProfile;
-
 /**
  * The class describes properties for different types of browsers
  */
@@ -18,7 +15,6 @@ abstract class Options {
     FirefoxOptions firefoxOptions() {
         FirefoxOptions options = new FirefoxOptions();
         /* Adding settings for file download */
-        options.setProfile(getGeckoDownloadProfile());
         options.addArguments("--start-maximized");
         options.addArguments("--disable-infobars");
         options.addArguments("--disable-extensions");
@@ -43,7 +39,6 @@ abstract class Options {
         options.addArguments("--disable-gpu");
 
         /* Adding settings for file download */
-        options.setExperimentalOption("prefs", getFileDownloadOptions());
         return options;
     }
 }

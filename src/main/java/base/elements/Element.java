@@ -1,6 +1,7 @@
 package base.elements;
 
 import base.driver.InitialDriver;
+import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -12,6 +13,7 @@ import java.util.NoSuchElementException;
 
 import static base.util.BaseConstants.*;
 
+@Slf4j
 public class Element {
     protected WebDriver driver = InitialDriver.getInstance().getDriver();
 
@@ -26,6 +28,7 @@ public class Element {
     }
 
     public WebElement getWebElement(ExpectedCondition<WebElement> webElementExpectedCondition) {
+
         return waitElement().until(webElementExpectedCondition);
     }
     public boolean getWebStateOfElement(ExpectedCondition<Boolean> stateElementExpectedCondition) {
@@ -35,12 +38,15 @@ public class Element {
         return getWebElement(ExpectedConditions.elementToBeClickable(locator));
     }
     public boolean containsText(By locator,String text) {
+        log.info("Locator: "+locator+ " Text: "+text);
         return waitElement().until(ExpectedConditions.textToBePresentInElementLocated(locator,text));
     }
     public boolean waitUntilInvisible(By locator) {
+        log.info("Locator: "+locator);
         return waitElement().until(ExpectedConditions.invisibilityOfElementLocated(locator));
     }
     public WebElement waitUntilClickable(WebElement element) {
+        log.info("Locator: "+element);
         return getWebElement(ExpectedConditions.elementToBeClickable(element));
     }
 
@@ -49,6 +55,7 @@ public class Element {
     }
 
     public WebElement waitUntilVisible(By locator) {
+        log.info("Locator: "+locator);
         return getWebElement(ExpectedConditions.visibilityOfElementLocated(locator));
     }
 
@@ -58,7 +65,7 @@ public class Element {
 
     public boolean isVisibility(By locator) {
         try {
-
+            log.info("Element visible: "+locator);
             return new WebDriverWait(driver, EXIST).until(ExpectedConditions.visibilityOfElementLocated(locator)).isDisplayed();
         } catch (TimeoutException ex) {
             return false;

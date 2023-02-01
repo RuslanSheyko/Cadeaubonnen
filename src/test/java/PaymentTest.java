@@ -1,5 +1,8 @@
 import base.listeners.Listener;
 import com.github.javafaker.Faker;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
+import io.qameta.allure.Story;
 import org.testng.Assert;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
@@ -17,6 +20,8 @@ import static base.util.BaseConstants.SHOP_URL;
 public class PaymentTest {
 
     @Test
+    @Severity(SeverityLevel.CRITICAL)
+    @Story("Add two product to cart")
     public void addProductToCart() {
         Faker faker = new Faker();
         String email = faker.internet().emailAddress();
@@ -40,6 +45,8 @@ public class PaymentTest {
 
 
     @Test(dependsOnMethods = "addProductToCart")
+    @Severity(SeverityLevel.CRITICAL)
+    @Story("Proceed to checkout and try to put credit card data.")
     public void addCreditCard() {
         Faker faker = new Faker();
         MyShoppingCartPage shop = new MyShoppingCartPage();
